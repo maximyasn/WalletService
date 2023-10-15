@@ -17,19 +17,11 @@ import java.util.UUID;
  */
 public class SessionService {
 
-    /** Сервис взаимодействия с игроком */
-    private final PlayerService playerService = new PlayerService();
-
-    /** Сервис взаимодействия с процессом регистрации/авторизации игрока */
-    private final RegistrationService registrationService = new RegistrationService();
-
-    /** Сервис взаимодействия с транзакией */
-    private final TransactionService transactionService = new TransactionService();
 
     private final Scanner scanner = new Scanner(System.in);
 
     /** Стоп-слово, ввод которого завершает текущую сессию */
-    private final String EXIT = "exit";
+    private final String exit = "exit";
 
     /**
      * Метод, дающий начало новой сессии. Игрок выбирает
@@ -42,10 +34,9 @@ public class SessionService {
         Journal.put("Сессия открыта", EventStatus.SUCCESS);
 
         String input = "";
-        Player player = null;
 
 
-        while (!input.trim().equals(EXIT)) {
+        while (!input.trim().equals(exit)) {
 
             System.out.println("""
                     Вас приветствует Wallet-Service!
@@ -58,59 +49,30 @@ public class SessionService {
             input = scanner.nextLine().trim();
 
             if (input.trim().equals("1")) {
-                Journal.put("Пользователь пытается войти в свой аккаунт", EventStatus.SUCCESS);
-
-                System.out.println("""
-                        Введите имя пользователя и пароль.""");
-
-                String name;
-                String password;
-
-                input = scanner.nextLine().trim();
-                name = input;
-                input = scanner.nextLine().trim();
-                password = input;
                 try {
-                    player = registrationService.authorizePlayer(name, password);
-                    Journal.put("Пользователь авторизовался", EventStatus.SUCCESS);
+                    return enterIntoAccount();
                 } catch (NotAuthorizedException e) {
                     System.out.println(e.getMessage());
                     Journal.put("Пользователь авторизовался", EventStatus.FAIlED);
-                    continue;
                 }
-                break;
+
             } else if (input.equals("2")) {
-                Journal.put("Пользователь пытается создать новый аккаунт", EventStatus.SUCCESS);
-                String name;
-                String password;
-                System.out.print("""
-                        Введите имя нового игрока. Оно должно
-                        состоять только из латинских букв любого регистра
-                        и цифр, иметь длину 2-20 символов, начиная с буквы:\n""");
-
-
-                input = scanner.nextLine().trim();
-                name = input;
-                System.out.print("""
-                        \nВведите пароль для нового икрока. Он должен
-                        содержать минимум 8 символов и должен состоять из
-                        латинских букв и цифр, должен содержать минимум одну
-                        заглавную букву и может содержать спецсимволы:\n""");
-                input = scanner.nextLine().trim();
-                password = input;
                 try {
-                    player = registrationService.registerNewPlayer(name, password);
-                    Journal.put("Пользователь " + player.getName() + " зарегистрировал новый аккаунт", EventStatus.SUCCESS);
+                    return registration();
                 } catch (PlayerExsistsException | NameValidationException | PasswordValidationException e) {
                     System.out.println(e.getMessage());
                     Journal.put("Пользователь ... зарегистрировал новый аккаунт", EventStatus.FAIlED);
-                    continue;
                 }
-                System.out.println("Регистрация прошла успешно!\n\n\n");
-                break;
+            } else {
+                if(input.trim().equals("exit")) {
+                    System.out.println("До свидания!");
+                    return null;
+                } else {
+                    System.out.println("\nНекорректные данные!\n");
+                }
             }
         }
-        return player;
+        return null;
     }
 
     /**
@@ -138,7 +100,7 @@ public class SessionService {
         String input = "";
         boolean stop = false;
 
-        while (!input.equals(EXIT)) {
+        while (!input.equals(exit)) {
             System.out.println("Интерфейс игрока " + player.getName() + "\n");
             System.out.println("""
                     1. Cнятие средств.
@@ -153,91 +115,160 @@ public class SessionService {
 
             Journal.put("Пользователь " + player.getName() + " выбрал действие " + input, EventStatus.SUCCESS);
 
-            if (input.equals("1")) {
-                System.out.println("\n");
-                System.out.println("""
-                        Введите сумму, которую желаете снять:""");
-                input = scanner.nextLine().trim();
-                BigDecimal sum;
-                try {
-                    sum = BigDecimal.valueOf(Double.parseDouble(input));
-                    Journal.put("Пользователь " + player.getName() + "ввел сумму", EventStatus.SUCCESS);
-                } catch (NumberFormatException e) {
-                    Journal.put("Пользователь " + player.getName() + "ввел сумму", EventStatus.FAIlED);
-                    System.out.println("Неверный формат ввода данных.");
-                    continue;
+            switch (input) {
+                case "1" -> {
+                    try {
+                        withdrawal(player);
+                    } catch (NegativeBalanceException e) {
+                        System.out.println("На балансе недостаточно средств!");
+                        Journal.put("Транзакция прошла успешно", EventStatus.FAIlED);
+                        continue;
+                    } catch (TransactionExistsException e) {
+                        System.out.println("Транзакция с таким id уже существует!");
+                        Journal.put("Транзакция прошла успешно", EventStatus.FAIlED);
+                        continue;
+                    } catch (NumberFormatException e) {
+                        Journal.put("Пользователь " + player.getName() + "ввел сумму", EventStatus.FAIlED);
+                        System.out.println("Неверный формат ввода данных.");
+                        continue;
+                    }
+                    System.out.println("""
+                            Транзакция успешно совершена!\n\n""");
                 }
-                UUID id = player.getTransactionID();
-                Transaction transaction = new Transaction(player, TransactionType.DEBIT, sum, id);
-                Journal.put("Транзакция создалась", EventStatus.SUCCESS);
-                try {
-                    transactionService.doTransaction(player, transaction);
-                    Journal.put("Транзакция прошла успешно", EventStatus.SUCCESS);
-                } catch (NegativeBalanceException e) {
-                    System.out.println("На балансе недостаточно средств!");
-                    Journal.put("Транзакция прошла успешно", EventStatus.FAIlED);
-                    continue;
-                } catch (TransactionExistsException e) {
-                    System.out.println("Транзакция с таким id уже существует!");
-                    Journal.put("Транзакция прошла успешно", EventStatus.FAIlED);
-                    continue;
+                case "2" -> {
+                    try {
+                        refill(player);
+                    } catch (TransactionExistsException | NegativeBalanceException e) {
+                        Journal.put("Транзакция прошла успешно", EventStatus.FAIlED);
+                        System.out.println("Транзакция с таким id уже существует!");
+                        continue;
+                    } catch (NumberFormatException e) {
+                        Journal.put("Пользователь " + player.getName() + "ввел сумму", EventStatus.FAIlED);
+                        System.out.println("Неверный формат ввода данных.");
+                        continue;
+                    }
+                    System.out.println("""
+                            Транзакция успешно завершена!\n\n""");
                 }
-                System.out.println("""
-                        Транзакция успешно совершена!\n\n""");
-
-            } else if (input.equals("2")) {
-
-                System.out.println("\n");
-                System.out.println("""
-                        Введите сумму, которую желаете зачислить на баланс:""");
-                input = scanner.nextLine().trim();
-
-                BigDecimal sum;
-                try {
-                    sum = BigDecimal.valueOf(Double.parseDouble(input));
-                    Journal.put("Пользователь " + player.getName() + "ввел сумму", EventStatus.SUCCESS);
-                } catch (NumberFormatException e) {
-                    Journal.put("Пользователь " + player.getName() + "ввел сумму", EventStatus.FAIlED);
-                    System.out.println("Неверный формат ввода данных.");
-                    continue;
+                case "3" -> PlayerService.getPlayersTransactionHistory(player);
+                case "4" -> {
+                    Journal.put("Пользователь " + player.getName() + " вышел из аккаунта", EventStatus.SUCCESS);
+                    return stop;
                 }
-                UUID id = player.getTransactionID();
-                Transaction transaction = new Transaction(player, TransactionType.CREDIT, sum, id);
-                Journal.put("Транзакция создалась", EventStatus.SUCCESS);
-                try {
-                    transactionService.doTransaction(player, transaction);
-                    Journal.put("Транзакция прошла успешно", EventStatus.SUCCESS);
-                } catch (TransactionExistsException | NegativeBalanceException e) {
-                    Journal.put("Транзакция прошла успешно", EventStatus.FAIlED);
-                    System.out.println("Транзакция с таким id уже существует!");
-                    continue;
+                case "5" -> PlayerService.checkCurrentBalance(player);
+                case "6" -> {
+                    Journal.journalOnRead();
+                    Journal.put("Пользователь " + player.getName() + " открыл журнал", EventStatus.SUCCESS);
                 }
-
-                System.out.println("""
-                        Транзакция успешно завершена!\n\n""");
-
-            } else if (input.equals("3")) {
-                playerService.getPlayersTransactionHistory(player);
-
-            } else if (input.equals("4")) {
-                Journal.put("Пользователь " + player.getName() + " вышел из аккаунта", EventStatus.SUCCESS);
-                return stop;
-            } else if(input.equals("5")) {
-                playerService.checkCurrentBalance(player);
-            } else if(input.equals("6")) {
-                Journal.journalOnRead();
-                Journal.put("Пользователь " + player.getName() + " открыл журнал", EventStatus.SUCCESS);
-            } else {
-                if(input.equals("exit")) {
-                    Journal.put("Пользователь " + player.getName() + " выбрал действие " + input + " : ", EventStatus.SUCCESS);
-                    System.out.println("До свидания!");
-                } else {
-                    Journal.put("Пользователь " + player.getName() + " выбрал действие " + input, EventStatus.FAIlED);
-                    System.out.println("Введите корректные данные!\n\n\n");
+                default -> {
+                    if (input.equals("exit")) {
+                        Journal.put("Пользователь " + player.getName() + " выбрал действие " + input + " : ", EventStatus.SUCCESS);
+                        System.out.println("До свидания!");
+                    } else {
+                        Journal.put("Пользователь " + player.getName() + " выбрал действие " + input, EventStatus.FAIlED);
+                        System.out.println("Введите корректные данные!\n\n\n");
+                    }
                 }
             }
         }
         stop = true;
         return stop;
+    }
+
+    /**
+     * Сгятие средств со счета.
+     * @param player текущий игрок
+     * @throws NegativeBalanceException недостаточно средств на балансе
+     * @throws TransactionExistsException id транзакции не уникален
+     */
+    private void withdrawal (Player player) throws NegativeBalanceException, TransactionExistsException, NumberFormatException {
+        System.out.println("\n");
+        System.out.println("""
+                        Введите сумму, которую желаете снять:""");
+        String inputWith = scanner.nextLine().trim();
+        BigDecimal sum;
+
+        sum = BigDecimal.valueOf(Double.parseDouble(inputWith));
+        Journal.put("Пользователь " + player.getName() + " ввел сумму", EventStatus.SUCCESS);
+
+        UUID id = player.getTransactionID();
+        Transaction transaction = new Transaction(player, TransactionType.DEBIT, sum, id);
+        Journal.put("Транзакция создалась", EventStatus.SUCCESS);
+
+        TransactionService.doTransaction(player, transaction);
+        Journal.put("Транзакция прошла успешно", EventStatus.SUCCESS);
+    }
+
+    /**
+     * Пополнение средств
+     * @param player текущий игрок
+     * @throws TransactionExistsException id транзакции не уникален
+     */
+    private void refill(Player player) throws NumberFormatException, NegativeBalanceException, TransactionExistsException {
+        System.out.println("\n");
+        System.out.println("""
+                        Введите сумму, которую желаете зачислить на баланс:""");
+        String inputRefill = scanner.nextLine().trim();
+
+        BigDecimal sum;
+        sum = BigDecimal.valueOf(Double.parseDouble(inputRefill));
+        Journal.put("Пользователь " + player.getName() + "ввел сумму", EventStatus.SUCCESS);
+
+        UUID id = player.getTransactionID();
+        Transaction transaction = new Transaction(player, TransactionType.CREDIT, sum, id);
+        Journal.put("Транзакция создалась", EventStatus.SUCCESS);
+
+        TransactionService.doTransaction(player, transaction);
+        Journal.put("Транзакция прошла успешно", EventStatus.SUCCESS);
+    }
+
+    /**
+     * Вход в пользовательский аккаунт
+     * @return текущий игрок
+     * @throws NotAuthorizedException пользователь не найден
+     */
+    private Player enterIntoAccount() throws NotAuthorizedException {
+        Journal.put("Пользователь пытается войти в свой аккаунт", EventStatus.SUCCESS);
+
+        System.out.println("""
+                        Введите имя пользователя и пароль.""");
+
+        String name = scanner.nextLine().trim();
+        String password = scanner.nextLine().trim();
+
+        Player player = RegistrationService.authenticatePlayer(name, password);
+        Journal.put("Пользователь авторизовался", EventStatus.SUCCESS);
+
+        return player;
+    }
+
+    /**
+     * Регистрация нового пользователя
+     * @return зарегистрированный пользователь
+     * @throws PlayerExsistsException имя пользователя не является уникальным
+     * @throws NameValidationException ошибка валидации имени пользователя
+     * @throws PasswordValidationException ошибка валидации пароля пользователя
+     */
+    private Player registration() throws PlayerExsistsException, NameValidationException, PasswordValidationException{
+        Journal.put("Пользователь пытается создать новый аккаунт", EventStatus.SUCCESS);
+        String name;
+        String password;
+        System.out.print("""
+                        Введите имя нового игрока. Оно должно
+                        состоять только из латинских букв любого регистра
+                        и цифр, иметь длину 2-20 символов, начиная с буквы:\n""");
+
+
+        name = scanner.nextLine().trim();
+        System.out.print("""
+                        \nВведите пароль для нового икрока. Он должен
+                        содержать минимум 8 символов и должен состоять из
+                        латинских букв и цифр, должен содержать минимум одну
+                        заглавную букву и может содержать спецсимволы:\n""");
+        password = scanner.nextLine().trim();
+
+        Player player = RegistrationService.registerNewPlayer(name, password);
+        Journal.put("Пользователь " + player.getName() + " зарегистрировал новый аккаунт", EventStatus.SUCCESS);
+        return player;
     }
 }

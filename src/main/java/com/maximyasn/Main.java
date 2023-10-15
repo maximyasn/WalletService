@@ -21,7 +21,6 @@ public class Main {
         while (!stop) {
             Player player = sessionService.startSession();
             if(player == null) {
-                System.out.println("До свидания!");
                 break;
             }
             stop = sessionService.playersInterface(player);

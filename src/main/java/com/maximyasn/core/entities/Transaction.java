@@ -15,7 +15,7 @@ public class Transaction {
     /** Игрок-создатель транзакции */
     private Player player;
 
-    /** Тип транзакции из перечисление TransactionType */
+    /** Тип транзакции из перечисления TransactionType */
     private TransactionType transactionType;
 
     /** Сумма, участвующая в транзакции */
@@ -39,9 +39,6 @@ public class Transaction {
         return moneyCount;
     }
 
-    public void setMoneyCount(BigDecimal moneyCount) {
-        this.moneyCount = moneyCount;
-    }
 
     public UUID getId() {
         return id;

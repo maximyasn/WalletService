@@ -3,6 +3,7 @@ package com.maximyasn.core.services.in;
 
 import com.maximyasn.core.entities.Player;
 import com.maximyasn.core.entities.Transaction;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -18,6 +19,7 @@ class PlayerServiceTest {
     Transaction transaction = Mockito.mock(Transaction.class);
 
     @Test
+    @DisplayName("Проверка стандартного сценария работы метода getBalance()")
     void checkPlayersBalanceTest() {
         Mockito.when(player.getBalance()).thenReturn(new BigDecimal(0));
 
@@ -26,6 +28,7 @@ class PlayerServiceTest {
 
 
     @Test
+    @DisplayName("Проверка стандартного сценария работы метода getTransactionsHistory()")
     void getPlayersTransactionHistoryTest(){
         List<Transaction> transactions = new ArrayList<>();
 

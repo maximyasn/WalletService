@@ -13,11 +13,13 @@ import java.util.List;
  */
 public class PlayerService {
 
+
     /**
      * Метод, выводящий в консоль текущий бланас игрока
      * @param player игрок, с чьего аккаунта ведутся действия
      */
-    public void checkCurrentBalance(Player player) {
+    public static void checkCurrentBalance(Player player) {
+
         if (player != null) {
             System.out.println(player.getBalance());
             System.out.println("\n");
@@ -31,7 +33,7 @@ public class PlayerService {
      * Метод, выводящий в консоль текущую историю транзакций игрока
      * @param player игрок, с чьего аккаунта ведутся действия
      */
-    public void getPlayersTransactionHistory(Player player) {
+    public static void getPlayersTransactionHistory(Player player) {
         if(player != null) {
             List<Transaction> transactions = player.getTransactionsHistory();
             if(transactions.isEmpty()) {

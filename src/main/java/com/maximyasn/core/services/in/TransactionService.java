@@ -5,10 +5,8 @@ import com.maximyasn.core.entities.Transaction;
 import com.maximyasn.core.entities.enums.EventStatus;
 import com.maximyasn.core.entities.exceptions.NegativeBalanceException;
 import com.maximyasn.core.entities.exceptions.TransactionExistsException;
+import com.maximyasn.core.repo.TransactionRepo;
 import com.maximyasn.data.Journal;
-import com.maximyasn.data.Transactions;
-
-import java.math.BigDecimal;
 
 /**
  * Сервисный класс, предоставляющий метод для
@@ -23,12 +21,12 @@ public class TransactionService {
      * @throws NegativeBalanceException недостаточно средств на балансе
      * @throws TransactionExistsException транзакция с данным ID уже существует
      */
-    public void doTransaction(Player player, Transaction transaction) throws NegativeBalanceException, TransactionExistsException {
+    public static void doTransaction(Player player, Transaction transaction) throws NegativeBalanceException, TransactionExistsException {
         switch (transaction.getTransactionType()) {
-            case DEBIT:
+            case DEBIT -> {
                 Journal.put("Пользователь " + player.getName() + " снимает средства", EventStatus.SUCCESS);
                 if (player.getBalance().subtract(transaction.getMoneyCount()).doubleValue() >= 0) {
-                    Transactions.addTransaction(transaction);
+                    TransactionRepo.addTransaction(transaction);
                     Journal.put("Транзакция " + transaction.getId() + " добавлена в историю транзакций", EventStatus.SUCCESS);
                     player.setBalance(player.getBalance().subtract(transaction.getMoneyCount()));
                     player.getTransactionsHistory().add(transaction);
@@ -37,16 +35,15 @@ public class TransactionService {
                     Journal.put("Снятие средств успешно завершено", EventStatus.FAIlED);
                     throw new NegativeBalanceException("Недостаточно средств на балансе!");
                 }
-                break;
-
-            case CREDIT:
+            }
+            case CREDIT -> {
                 Journal.put("Пользователь " + player.getName() + " пополняет баланс", EventStatus.SUCCESS);
-                Transactions.addTransaction(transaction);
+                TransactionRepo.addTransaction(transaction);
                 Journal.put("Транзакция " + transaction.getId() + " добавлена в историю транзакций", EventStatus.SUCCESS);
                 player.setBalance(player.getBalance().add(transaction.getMoneyCount()));
                 player.getTransactionsHistory().add(transaction);
                 Journal.put("Пополнение баланса успешно завершено", EventStatus.SUCCESS);
-                break;
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.maximyasn.core.services.in;
 
 import com.maximyasn.core.entities.Player;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -12,6 +13,7 @@ class SessionServiceTest {
     Player player = Mockito.mock(Player.class);
 
     @Test
+    @DisplayName("Проверка возврата методом игрока")
     void startSessionTest() {
         Mockito.when(sessionService.startSession()).thenReturn(player);
 
@@ -19,6 +21,7 @@ class SessionServiceTest {
     }
 
     @Test
+    @DisplayName("Проверка возврата методом логического значения")
     void playersInterfaceTest() {
         Mockito.when(sessionService.playersInterface(player)).thenReturn(true);
 
