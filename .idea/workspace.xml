@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc0318c9-34f9-48c2-a2e1-7b6dfe9b444c" name="Changes" comment="Внесены некоторые правки по замечаниям" />
+    <list default="true" id="cc0318c9-34f9-48c2-a2e1-7b6dfe9b444c" name="Changes" comment="task2">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/AbstractRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/RepoInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/Requests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/DefaultService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/001-create-table-players.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/002-create-table-transactions.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/changelog.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/config/liquibase.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/entities/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/entities/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/PlayerRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/PlayerRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/TransactionRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/TransactionRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/PlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/PlayerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/RegistrationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/SessionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/TransactionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/data/Players.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/data/Transactions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/maximyasn/core/services/in/PlayerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/maximyasn/core/services/in/PlayerServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/maximyasn/core/services/in/RegistrationServiceTest.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +49,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="task1-refactor" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,6 +77,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -60,21 +89,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;task2JDBC&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ],
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/&quot;: [
+      &quot;PostgreSQL&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -97,7 +136,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RegistrationServiceTest.authorizePlayerExceptionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PlayerServiceTest.registerNewPlayerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="WalletService" />
       <extension name="coverage">
         <pattern>
@@ -106,8 +145,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.maximyasn.core.services.in" />
-      <option name="MAIN_CLASS_NAME" value="com.maximyasn.core.services.in.RegistrationServiceTest" />
-      <option name="METHOD_NAME" value="authorizePlayerExceptionTest" />
+      <option name="MAIN_CLASS_NAME" value="com.maximyasn.core.services.in.PlayerServiceTest" />
+      <option name="METHOD_NAME" value="registerNewPlayerTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -163,11 +202,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.SessionServiceTest.startSessionTest" />
+        <item itemvalue="JUnit.PlayerServiceTest.registerNewPlayerTest" />
         <item itemvalue="JUnit.SessionServiceTest.playersInterfaceTest" />
         <item itemvalue="JUnit.RegistrationServiceTest.registerNewPlayerExistException" />
-        <item itemvalue="JUnit.RegistrationServiceTest.authorizePlayerExceptionTest" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -185,6 +224,8 @@
       <workItem from="1697038658257" duration="49000" />
       <workItem from="1697040388169" duration="1252000" />
       <workItem from="1697383395430" duration="12685000" />
+      <workItem from="1697451586100" duration="10567000" />
+      <workItem from="1697475360286" duration="51830000" />
     </task>
     <task id="LOCAL-00001" summary="Ready-to-use application">
       <option name="closed" value="true" />
@@ -202,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697397003266</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Внесены некоторые правки по замечаниям">
+      <option name="closed" value="true" />
+      <created>1697451703753</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1697451703753</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,6 +260,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Ready-to-use application" />
     <MESSAGE value="Внесены некоторые правки по замечаниям" />
-    <option name="LAST_COMMIT_MESSAGE" value="Внесены некоторые правки по замечаниям" />
+    <MESSAGE value="task2" />
+    <option name="LAST_COMMIT_MESSAGE" value="task2" />
   </component>
 </project>
