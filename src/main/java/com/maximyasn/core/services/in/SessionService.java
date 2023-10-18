@@ -5,11 +5,11 @@ import com.maximyasn.core.entities.Transaction;
 import com.maximyasn.core.entities.enums.EventStatus;
 import com.maximyasn.core.entities.enums.TransactionType;
 import com.maximyasn.core.entities.exceptions.*;
+import com.maximyasn.core.repo.RepoInterface;
 import com.maximyasn.data.Journal;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
-import java.util.UUID;
+
 
 /**
  * Класс, представляющий собой текущую сессию работы приложения.
@@ -17,8 +17,19 @@ import java.util.UUID;
  */
 public class SessionService {
 
-
     private final Scanner scanner = new Scanner(System.in);
+
+    private final DefaultService<Player> playerService;
+
+    private final DefaultService<Transaction> transactionService;
+
+    private final RepoInterface<Player> playerRepo;
+
+    public SessionService(DefaultService<Player> playerService, DefaultService<Transaction> transactionService, RepoInterface<Player> playerRepo) {
+        this.playerService = playerService;
+        this.transactionService = transactionService;
+        this.playerRepo = playerRepo;
+    }
 
     /** Стоп-слово, ввод которого завершает текущую сессию */
     private final String exit = "exit";
@@ -118,7 +129,7 @@ public class SessionService {
             switch (input) {
                 case "1" -> {
                     try {
-                        withdrawal(player);
+                        withdrawal(player.getName());
                     } catch (NegativeBalanceException e) {
                         System.out.println("На балансе недостаточно средств!");
                         Journal.put("Транзакция прошла успешно", EventStatus.FAIlED);
@@ -137,7 +148,7 @@ public class SessionService {
                 }
                 case "2" -> {
                     try {
-                        refill(player);
+                        refill(player.getName());
                     } catch (TransactionExistsException | NegativeBalanceException e) {
                         Journal.put("Транзакция прошла успешно", EventStatus.FAIlED);
                         System.out.println("Транзакция с таким id уже существует!");
@@ -150,12 +161,12 @@ public class SessionService {
                     System.out.println("""
                             Транзакция успешно завершена!\n\n""");
                 }
-                case "3" -> PlayerService.getPlayersTransactionHistory(player);
+                case "3" -> playerService.getPlayersTransactionHistory(player.getName());
                 case "4" -> {
                     Journal.put("Пользователь " + player.getName() + " вышел из аккаунта", EventStatus.SUCCESS);
                     return stop;
                 }
-                case "5" -> PlayerService.checkCurrentBalance(player);
+                case "5" -> playerService.checkCurrentBalance(player.getName());
                 case "6" -> {
                     Journal.journalOnRead();
                     Journal.put("Пользователь " + player.getName() + " открыл журнал", EventStatus.SUCCESS);
@@ -177,48 +188,49 @@ public class SessionService {
 
     /**
      * Сгятие средств со счета.
-     * @param player текущий игрок
+     * @param playerName текущий игрок
      * @throws NegativeBalanceException недостаточно средств на балансе
      * @throws TransactionExistsException id транзакции не уникален
      */
-    private void withdrawal (Player player) throws NegativeBalanceException, TransactionExistsException, NumberFormatException {
+    private void withdrawal (String playerName) throws NegativeBalanceException, TransactionExistsException, NumberFormatException {
         System.out.println("\n");
         System.out.println("""
                         Введите сумму, которую желаете снять:""");
         String inputWith = scanner.nextLine().trim();
-        BigDecimal sum;
+        Double sum;
 
-        sum = BigDecimal.valueOf(Double.parseDouble(inputWith));
-        Journal.put("Пользователь " + player.getName() + " ввел сумму", EventStatus.SUCCESS);
+        sum = Double.valueOf(inputWith);
+        Journal.put("Пользователь " + playerName + " ввел сумму", EventStatus.SUCCESS);
 
-        UUID id = player.getTransactionID();
-        Transaction transaction = new Transaction(player, TransactionType.DEBIT, sum, id);
+        Player player = playerRepo.getByName(playerName);
+
+        Transaction transaction = new Transaction(player, TransactionType.DEBIT, sum);
         Journal.put("Транзакция создалась", EventStatus.SUCCESS);
 
-        TransactionService.doTransaction(player, transaction);
+        transactionService.doTransaction(playerRepo, player, transaction);
         Journal.put("Транзакция прошла успешно", EventStatus.SUCCESS);
     }
 
     /**
      * Пополнение средств
-     * @param player текущий игрок
+     * @param playerName текущий игрок
      * @throws TransactionExistsException id транзакции не уникален
      */
-    private void refill(Player player) throws NumberFormatException, NegativeBalanceException, TransactionExistsException {
+    private void refill(String playerName) throws NumberFormatException, NegativeBalanceException, TransactionExistsException {
         System.out.println("\n");
         System.out.println("""
                         Введите сумму, которую желаете зачислить на баланс:""");
         String inputRefill = scanner.nextLine().trim();
 
-        BigDecimal sum;
-        sum = BigDecimal.valueOf(Double.parseDouble(inputRefill));
-        Journal.put("Пользователь " + player.getName() + "ввел сумму", EventStatus.SUCCESS);
+        Double sum;
+        sum = Double.valueOf(inputRefill);
+        Journal.put("Пользователь " + playerName + " ввел сумму", EventStatus.SUCCESS);
 
-        UUID id = player.getTransactionID();
-        Transaction transaction = new Transaction(player, TransactionType.CREDIT, sum, id);
+        Player playerFromDb = playerRepo.getByName(playerName);
+        Transaction transaction = new Transaction(playerFromDb, TransactionType.CREDIT, sum);
         Journal.put("Транзакция создалась", EventStatus.SUCCESS);
 
-        TransactionService.doTransaction(player, transaction);
+        transactionService.doTransaction(playerRepo ,playerFromDb, transaction);
         Journal.put("Транзакция прошла успешно", EventStatus.SUCCESS);
     }
 
@@ -236,7 +248,7 @@ public class SessionService {
         String name = scanner.nextLine().trim();
         String password = scanner.nextLine().trim();
 
-        Player player = RegistrationService.authenticatePlayer(name, password);
+        Player player = playerService.authenticatePlayer(name, password);
         Journal.put("Пользователь авторизовался", EventStatus.SUCCESS);
 
         return player;
@@ -267,7 +279,7 @@ public class SessionService {
                         заглавную букву и может содержать спецсимволы:\n""");
         password = scanner.nextLine().trim();
 
-        Player player = RegistrationService.registerNewPlayer(name, password);
+        Player player = playerService.registerNewPlayer(name, password);
         Journal.put("Пользователь " + player.getName() + " зарегистрировал новый аккаунт", EventStatus.SUCCESS);
         return player;
     }

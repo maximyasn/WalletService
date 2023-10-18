@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cc0318c9-34f9-48c2-a2e1-7b6dfe9b444c" name="Changes" comment="task2">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/AbstractRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/RepoInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/Requests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/DefaultService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/001-create-table-players.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/002-create-table-transactions.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/changelog.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/config/liquibase.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/entities/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/entities/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/PlayerRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/PlayerRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/TransactionRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/repo/TransactionRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/PlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/PlayerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/RegistrationService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/SessionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/maximyasn/core/services/in/TransactionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/data/Players.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/maximyasn/data/Transactions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/maximyasn/core/services/in/PlayerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/maximyasn/core/services/in/PlayerServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/maximyasn/core/services/in/RegistrationServiceTest.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;maximyasn&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="maximyasn" />
+        <option name="repository" value="WalletService" />
+      </RepoCoordinatesHolder>
+    </option>
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="06519c38-1366-4adb-be1d-b5cb9efa9f4d" />
+        <option name="url" value="https://github.com/maximyasn/WalletService.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2WUHxgBbHFYGT75Dq6MBsRV04xe" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;task2JDBC&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ],
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/&quot;: [
+      &quot;PostgreSQL&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.maximyasn.core.services.in" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.maximyasn.Main" />
+      <module name="WalletService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.maximyasn.core.services.in.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerServiceTest.registerNewPlayerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WalletService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.maximyasn.core.services.in.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.maximyasn.core.services.in" />
+      <option name="MAIN_CLASS_NAME" value="com.maximyasn.core.services.in.PlayerServiceTest" />
+      <option name="METHOD_NAME" value="registerNewPlayerTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegistrationServiceTest.registerNewPlayerExistException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WalletService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.maximyasn.core.services.in.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.maximyasn.core.services.in" />
+      <option name="MAIN_CLASS_NAME" value="com.maximyasn.core.services.in.RegistrationServiceTest" />
+      <option name="METHOD_NAME" value="registerNewPlayerExistException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SessionServiceTest.playersInterfaceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WalletService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.maximyasn.core.services.in.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.maximyasn.core.services.in" />
+      <option name="MAIN_CLASS_NAME" value="com.maximyasn.core.services.in.SessionServiceTest" />
+      <option name="METHOD_NAME" value="playersInterfaceTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SessionServiceTest.startSessionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WalletService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.maximyasn.core.services.in.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.maximyasn.core.services.in" />
+      <option name="MAIN_CLASS_NAME" value="com.maximyasn.core.services.in.SessionServiceTest" />
+      <option name="METHOD_NAME" value="startSessionTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.SessionServiceTest.startSessionTest" />
+        <item itemvalue="JUnit.PlayerServiceTest.registerNewPlayerTest" />
+        <item itemvalue="JUnit.SessionServiceTest.playersInterfaceTest" />
+        <item itemvalue="JUnit.RegistrationServiceTest.registerNewPlayerExistException" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cc0318c9-34f9-48c2-a2e1-7b6dfe9b444c" name="Changes" comment="" />
+      <created>1696780486317</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696780486317</updated>
+      <workItem from="1696780487370" duration="18392000" />
+      <workItem from="1696873081063" duration="158000" />
+      <workItem from="1696926124829" duration="22874000" />
+      <workItem from="1697038658257" duration="49000" />
+      <workItem from="1697040388169" duration="1252000" />
+      <workItem from="1697383395430" duration="12685000" />
+      <workItem from="1697451586100" duration="10567000" />
+      <workItem from="1697475360286" duration="51830000" />
+    </task>
+    <task id="LOCAL-00001" summary="Ready-to-use application">
+      <option name="closed" value="true" />
+      <created>1696966562416</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1696966562416</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Внесены некоторые правки по замечаниям">
+      <option name="closed" value="true" />
+      <created>1697397003266</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1697397003266</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Внесены некоторые правки по замечаниям">
+      <option name="closed" value="true" />
+      <created>1697451703753</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1697451703753</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ready-to-use application" />
+    <MESSAGE value="Внесены некоторые правки по замечаниям" />
+    <MESSAGE value="task2" />
+    <option name="LAST_COMMIT_MESSAGE" value="task2" />
+  </component>
+</project>

@@ -2,15 +2,14 @@ package com.maximyasn.core.entities;
 
 import com.maximyasn.core.entities.enums.TransactionType;
 
-import java.math.BigDecimal;
-import java.util.UUID;
+
 
 /** Класс, представляющий сущность транзакции */
 
 public class Transaction {
 
     /** Идентификатор транзакции */
-    private final UUID id;
+    private Integer id;
 
     /** Игрок-создатель транзакции */
     private Player player;
@@ -19,28 +18,30 @@ public class Transaction {
     private TransactionType transactionType;
 
     /** Сумма, участвующая в транзакции */
-    private BigDecimal moneyCount;
+    private Double moneyCount;
 
     /**
      * Конструктор класса Транзакции
      * @param player игрок-создатель транзакции
      * @param transactionType тип транзакции
      * @param moneyCount сумма транзакции
-     * @param id идентификатор транзакции
      */
-    public Transaction(Player player, TransactionType transactionType, BigDecimal moneyCount, UUID id) {
+    public Transaction(Player player, TransactionType transactionType, Double moneyCount) {
         this.player = player;
         this.transactionType = transactionType;
         this.moneyCount = moneyCount;
-        this.id = id;
     }
 
-    public BigDecimal getMoneyCount() {
+    public Transaction(TransactionType transactionType, Double moneyCount) {
+        this.transactionType = transactionType;
+        this.moneyCount = moneyCount;
+    }
+
+    public Double getMoneyCount() {
         return moneyCount;
     }
 
-
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -54,10 +55,8 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-               "id=" + id +
-               ", player=" + player +
-               ", transactionType=" + transactionType +
+        return "Transaction {" +
+               "transactionType=" + transactionType +
                ", moneyCount=" + moneyCount +
                '}';
     }

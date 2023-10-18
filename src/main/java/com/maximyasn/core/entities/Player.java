@@ -1,15 +1,14 @@
 package com.maximyasn.core.entities;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+
 
 /**
  * Класс, представляющий собой сущность игрока
  */
 
 public class Player {
+
+    private Integer id;
 
     /** Имя игрока */
     private String name;
@@ -18,10 +17,8 @@ public class Player {
     private String password;
 
     /** Баланс игрока */
-    private BigDecimal balance;
+    private Double balance;
 
-    /** История транзакций игрока */
-    private List<Transaction> transactionHistory;
 
     /**
      * Конструктор класса Игрок
@@ -33,44 +30,35 @@ public class Player {
     public Player(String name, String password) {
         this.name = name;
         this.password = password;
-        this.balance = BigDecimal.ZERO;
-        transactionHistory = new ArrayList<>();
+        this.balance = 0.0;
+    }
+
+    public Player(Integer id, String name, String password, Double balance) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.balance = balance;
     }
 
     /**
      * Генератор случайного ID, предоставляемый игроком
      * @return уникальный идентификатор UUID
      */
-    public UUID getTransactionID() {
-        return UUID.randomUUID();
-    }
-
-    public List<Transaction> getTransactionsHistory() {
-        return transactionHistory;
-    }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public BigDecimal getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
+    public Integer getId() {
+        return id;
     }
 
     @Override
